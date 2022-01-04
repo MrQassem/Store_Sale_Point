@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.ViewModels;
+using WpfApp1.Views;
 
 namespace WpfApp1
 {
@@ -38,10 +39,17 @@ namespace WpfApp1
 
        
         
-
+        // when the bar
         private void AddProductBtn(object sender, RoutedEventArgs e)
         {
             string bar_code = Bar_Code_TXT.Text.ToString();
+            // if empty bar code, stop the function.
+            if (bar_code.Length == 0)
+            {
+                MessageBox.Show("Bar code cannot be empty!");
+                return;
+            }
+
             ItemCollection currentProductsItems = ProductsListView.Items;
             List<product> productsList = currentProductsItems.OfType< product>().ToList();
             // loop through the cart and check if the product exists, add quantity, else, add the product.
@@ -60,7 +68,6 @@ namespace WpfApp1
             Boolean productExist = false;
             for (int i = 0; i < productsList.Count; i++)
             {
-
                 // the product is already in cart, so add 1 to quantity
                 if (bar_code.ToString().Equals( productsList[i].bar_code.ToString()))
                 {
@@ -75,10 +82,7 @@ namespace WpfApp1
                     {
                         return;
                     }
-
                 }
-                Console.WriteLine(productsList[i].description);
-                Console.WriteLine(productsList[i].quantity);
             }
             if(!productExist)
             {
@@ -114,7 +118,6 @@ namespace WpfApp1
             {
                 total += product.subTotal;
             }
-                Console.WriteLine(total);
             Total_TXT.Text = total + " SAR";
             VAT_TXT.Text = total * (decimal)0.15 + " SAR";
         }
@@ -123,6 +126,14 @@ namespace WpfApp1
         {
             ProductsListView.Items.Clear();
             UpdateTotal();
+        }
+
+
+        private void InventoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ContentSide.Content= new InventoryViews();
+            ;
+
         }
     }
 }

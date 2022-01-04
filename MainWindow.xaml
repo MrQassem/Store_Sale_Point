@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="1200">
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="Header">
             <Setter Property="FontSize" Value="20" />
@@ -14,7 +14,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!-- first column, main  -->
         <Grid Grid.Column="0" >
@@ -105,7 +105,7 @@
                     <TextBlock Grid.Row="0" Text="Paid" Style="{StaticResource Header}"/>
                     <TextBlock Grid.Row="1" Text="Return" Style="{StaticResource Header}"/>
                 </Grid>
-                
+
             </Grid>
             <!--action buttons-->
             <Grid Grid.Row="3"  >
@@ -117,7 +117,7 @@
 
                 <Button Grid.Column="0" x:Name="ResetBtn" Content="Reset"  Click="ResetBtn_Click"/>
                 <Button Grid.Column="1"  Content="Print"  />
-                <Button Grid.Column="2"  Content="Inventory"  />
+                <Button x:Name="InventoryBtn" Grid.Column="1"  Content="Inventory" Click="InventoryBtn_Click" Grid.ColumnSpan="2" Margin="185,0,26,0"  />
                 <!--<Button Grid.Column="1" x:Name="" Content="Reset"  Click="ResetBtn_Click"/>
                 <Button Grid.Column="2" x:Name="" Content="Reset"  Click="ResetBtn_Click"/>-->
             </Grid>
@@ -127,6 +127,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            <ContentControl Grid.Row="0" Name="ContentSide"/>
         </Grid>
     </Grid>
 </Window>
