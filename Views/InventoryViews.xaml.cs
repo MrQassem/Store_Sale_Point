@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,19 +22,23 @@ namespace WpfApp1.Views
     public partial class InventoryViews : UserControl
     {
         storeEntities store = new storeEntities();
+        public ObservableCollection<product> Products { get; set; }
 
         public InventoryViews()
         {
             InitializeComponent();
 
             InventoryDataGrid.ItemsSource = store.products.ToList().Select(product => 
-                new { product.description,
+                new {
+                    product.id,
+                    product.description,
                     product.bar_code,
                     product.price,
                     product.quantity
                 }
             ).ToList();
-            //InventoryDataGrid.Columns[5].Visibility = Visibility.Collapsed;
+            Products = new ObservableCollection<product>();
+            InventoryDataGrid.DataContext = this;
 
         }
 
@@ -42,6 +47,94 @@ namespace WpfApp1.Views
             store.SaveChanges();
         }
 
-        
+        private void AddNewProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ProductSelctedChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            product productToDelete = getSelectedProduct();
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to delete [ " +
+                productToDelete.description + " ]"
+                ,
+                "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                store.products.Remove(productToDelete);
+                store.SaveChanges();
+                MessageBox.Show("Deleted Successfully");
+                InventoryDataGrid.ItemsSource = null;
+                InventoryDataGrid.ItemsSource = store.products.ToList();
+            }
+        }
+
+        private void ProductSelctedChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            // the Mysql entity framework has a bug and it is crashing if I try to
+            // get the selected item and cast it to product. So I decided to substring the id
+            // from the object of the selcted item
+
+            product selectedProduct = getSelectedProduct();
+            if (selectedProduct != null)
+            {
+            Console.WriteLine(selectedProduct.description);
+
+            Id_TXT.Text = selectedProduct.id.ToString();
+            Description_TXT.Text = selectedProduct.description;
+            Bar_Code_TXT.Text = selectedProduct.bar_code;
+            Price_TXt.Text = selectedProduct.price.ToString();
+            Quantity_TXt.Text = selectedProduct.quantity.ToString();
+
+            }
+            else
+            {
+                Id_TXT.Text = "";
+                Description_TXT.Text = "";
+                Bar_Code_TXT.Text = "";
+                Price_TXt.Text = "";
+                Quantity_TXt.Text = "";
+            }
+
+        }
+        private product getSelectedProduct()
+        {
+            object selectedItem = InventoryDataGrid.SelectedValue;
+            Console.WriteLine(selectedItem);
+            if (selectedItem != null && selectedItem.ToString().Contains("id") || selectedItem is product)
+            {
+                if (selectedItem is product)
+                {
+                    product selectedProduct = (product)selectedItem;
+                    Console.WriteLine(selectedProduct);
+                    Console.WriteLine(selectedProduct.id);
+                    return selectedProduct;
+                }
+                else
+                {
+
+                int indexStart = selectedItem.ToString().IndexOf("id = ") + 5;
+                int indexEnd = selectedItem.ToString().IndexOf(", description");
+                int length = indexEnd - indexStart;
+
+                string id = selectedItem.ToString().Substring(indexStart, length);
+
+                product selectedProduct = store.products.Find(Int32.Parse(id));
+                Console.WriteLine(selectedItem);
+                Console.WriteLine(id);
+                return selectedProduct;
+                }
+            }
+            else
+            {
+                return null;
+            }
+            
+        }
     }
 }

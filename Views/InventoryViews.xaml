@@ -7,37 +7,42 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <!--first column, text fields for the inventory-->
-        <Grid>
-            
-        </Grid>
+        
         <!--second column, data grid inventory-->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <!--<ColumnDefinition Width="auto" />-->
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
 
-            <DataGrid Grid.Row="0" Grid.Column="0" x:Name="InventoryDataGrid" CanUserAddRows="False" CanUserDeleteRows="False"/>
-            <Button Grid.Row="1" Grid.Column="0" Content="Save" Click="SaveBtn_Click"></Button>
+
+        <DataGrid Grid.Row="0" Grid.Column="0" x:Name="InventoryDataGrid" ItemsSource="Products" CanUserAddRows="False" CanUserDeleteRows="False" Width="700" Height="200" SelectedCellsChanged="ProductSelctedChanged"/>
             <Grid Grid.Row="0" Grid.Column="1" >
-                
+                <StackPanel Grid.Row="0" Grid.Column="1" >
+                    <TextBlock Text="Id"/>
+                    <TextBox x:Name="Id_TXT" Text="" />
+                    <TextBlock Text="Description"/>
+                    <TextBox x:Name="Description_TXT" Text="" />
+                    <TextBlock Text="Bar Code"/>
+                    <TextBox x:Name="Bar_Code_TXT"  Text=""/>
+                    <TextBlock Text="Price"/>
+                    <TextBox x:Name="Price_TXt" Text="" />
+                    <TextBlock Text="Quantity"/>
+                    <TextBox x:Name="Quantity_TXt" Text=""/>
+                <StackPanel Orientation="Horizontal" >
+                    <Button  Content="Save" Click="SaveBtn_Click"></Button>
+                    <Button  Content="Add New Product" Click="AddNewProductBtn_Click"></Button>
+                    <Button  Content="Delete" Click="DeleteBtn_Click"></Button>
+                </StackPanel>
+            </StackPanel>
             </Grid>
-        </Grid>
-
+        
         <!--<TextBlock Text="Hi" Foreground="Green" FontSize="36" />-->
     </Grid>
 </UserControl>

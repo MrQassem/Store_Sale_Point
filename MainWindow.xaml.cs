@@ -132,7 +132,7 @@ namespace WpfApp1
         private void InventoryBtn_Click(object sender, RoutedEventArgs e)
         {
             ContentSide.Content= new InventoryViews();
-            ;
+            
 
         }
     }
