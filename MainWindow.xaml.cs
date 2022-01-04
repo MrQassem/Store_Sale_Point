@@ -41,33 +41,69 @@ namespace WpfApp1
 
         private void AddProductBtn(object sender, RoutedEventArgs e)
         {
-            string description = Bar_Code_TXT.Text.ToString();
+            string bar_code = Bar_Code_TXT.Text.ToString();
             ItemCollection currentProductsItems = ProductsListView.Items;
             List<product> productsList = currentProductsItems.OfType< product>().ToList();
             // loop through the cart and check if the product exists, add quantity, else, add the product.
-            Boolean productExist = false;
-            for (int i = 0; i < productsList.Count  ; i++)
+            // check if barcode exists in db products
+            product foundProduct = store.products.SingleOrDefault(product => product.bar_code == bar_code);
+            if (foundProduct != null)
             {
+                Console.WriteLine("product found, price is  : " + foundProduct.price);
+            }
+            else
+            {
+                MessageBox.Show(("No product with this bar code: " + bar_code));
+                // EXIT THE FUNCTION, THE PRODUCT DOESN' EXIST
+                return;
+            }
+            Boolean productExist = false;
+            for (int i = 0; i < productsList.Count; i++)
+            {
+
                 // the product is already in cart, so add 1 to quantity
-                if (description.ToString().Equals( productsList[i].description.ToString()))
+                if (bar_code.ToString().Equals( productsList[i].bar_code.ToString()))
                 {
-                    productExist = true;
-                    productsList[i].quantity++;
-                    currentProductsItems.Remove(productsList[i]);
-                    currentProductsItems.Add(productsList[i]);
+                    if (updateProductQuantity(addOrRemoveQuantity: -1, productId: foundProduct.id))
+                    {
+                        productExist = true;
+                        productsList[i].quantity++;
+                        currentProductsItems.Remove(productsList[i]);
+                        currentProductsItems.Add(productsList[i]);
+                    }
+                    else
+                    {
+                        return;
+                    }
+
                 }
                 Console.WriteLine(productsList[i].description);
                 Console.WriteLine(productsList[i].quantity);
             }
             if(!productExist)
             {
-                currentProductsItems.Add(new product { bar_code = "1111", quantity = 1, price = 111, description = description });
+                if (updateProductQuantity(addOrRemoveQuantity: -1, productId: foundProduct.id))
+                {
+                    currentProductsItems.Add(new product { bar_code = bar_code, quantity = 1, price = foundProduct.price, description = foundProduct.description});
+                }
+                else
+                {
+                    return;
+                }
             }
             UpdateTotal();
-            Console.WriteLine("productsList: " + productsList.Count);
-            Console.WriteLine("currentProductsItems: " + currentProductsItems.Count);
-            Console.WriteLine("currentProductsItems: " + currentProductsItems.Count);
-            
+        }
+        private bool updateProductQuantity(int addOrRemoveQuantity, int productId)
+        {
+            var productToBeUpdated = store.products.Find(productId);
+            if (productToBeUpdated.quantity<=0)
+            {
+                MessageBox.Show("Quantity for: ( " + productToBeUpdated.description + " ) has a quantity of " + productToBeUpdated.quantity + "\nCannot be added");
+                return false;
+            }
+            productToBeUpdated.quantity+= addOrRemoveQuantity;
+            store.SaveChanges();
+            return true;
         }
         private void UpdateTotal()
         {
@@ -85,7 +121,6 @@ namespace WpfApp1
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
         {
-            //ItemCollection currentProductsItems = ProductsListView.Items;
             ProductsListView.Items.Clear();
             UpdateTotal();
         }
