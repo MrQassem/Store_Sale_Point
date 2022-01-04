@@ -1,0 +1,132 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    
+    <Grid>
+
+        <!--<Button Content="Button" HorizontalAlignment="Left" Margin="281,173,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <DataGrid x:Name="McDataGrid" HorizontalAlignment="Left" Height="188" Margin="361,130,0,0" VerticalAlignment="Top" Width="325" SelectionChanged="DataGrid_SelectionChanged"/>-->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="160"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- first column, main  -->
+        <Grid Grid.Column="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="70" />
+            </Grid.RowDefinitions>
+            <!-- bar code  -->
+            <Grid Grid.Row="0" >
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Insert bard code"/>
+                <TextBox Name="Bar_Code_TXT"  Grid.Column="1" Text=""/>
+        
+            </Grid>
+            <!--main division-->
+            <Grid Grid.Row="1" >
+                <!--<TextBlock  Grid.Column="0" Text="Insert bard code"/>-->
+
+                <ListView x:Name="ProductsListView" ItemsSource="{Binding ProductsListView}"
+                    >
+                    <!--ItemsSource="{Binding ProductListing, Source=ProductListing}"--> 
+                    
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        
+                        <GridView>
+                            
+                            <GridViewColumn Header="#" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <!--<TextBlock HorizontalAlignment="Center" Text="{Binding id}" />-->
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding id}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Description" Width="440">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="0 0 20 0" Text="{Binding description}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Price">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="0 0 20 0" Text="{Binding price}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Quantity">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="0 0 20 0" Text="{Binding quantity}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
+                            <GridViewColumn Header="Sub Tot">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="0 0 20 0" Text="{Binding subTotal}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <!--reciept summary-->
+            <Grid Grid.Row="2" >
+                <Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>
+                <TextBlock  Grid.Column="0"><Run Text="Insert bard code"/><InlineUIContainer>
+                        <Button x:Name="AddItemBtn" Content="Add_1" Width="75" Click="Button_Click_1"/>
+                    </InlineUIContainer><InlineUIContainer>
+                        <Button x:Name="ResetBtn" Content="Reset" Width="75" Click="ResetBtn_Click"/>
+                    </InlineUIContainer></TextBlock>
+
+            </Grid>
+            <!--action buttons-->
+            <Grid Grid.Row="3" >
+                <Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>
+                <TextBlock  Grid.Column="0" Text="Insert bard code"/>
+
+            </Grid>
+
+        </Grid>
+        <!-- second column, products items list  -->
+        <Grid Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+        </Grid>
+
+
+
+
+
+
+    </Grid>
+</Window>
