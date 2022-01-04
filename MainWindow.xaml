@@ -8,15 +8,10 @@
         Title="MainWindow" Height="450" Width="800">
     
     <Grid>
-
-        <!--<Button Content="Button" HorizontalAlignment="Left" Margin="281,173,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <DataGrid x:Name="McDataGrid" HorizontalAlignment="Left" Height="188" Margin="361,130,0,0" VerticalAlignment="Top" Width="325" SelectionChanged="DataGrid_SelectionChanged"/>-->
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="160"/>
         </Grid.ColumnDefinitions>
-
         <!-- first column, main  -->
         <Grid Grid.Column="0" >
             <Grid.RowDefinitions>
@@ -30,37 +25,30 @@
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Insert bard code"/>
-                <TextBox Name="Bar_Code_TXT"  Grid.Column="1" Text=""/>
-        
+                <TextBox Grid.Column="1" Name="Bar_Code_TXT"   Text=""/>
+                <Button Grid.Column="2" x:Name="AddItemBtn" Content="Add" Width="75" Click="AddProductBtn" />
             </Grid>
             <!--main division-->
             <Grid Grid.Row="1" >
                 <!--<TextBlock  Grid.Column="0" Text="Insert bard code"/>-->
-
-                <ListView x:Name="ProductsListView" ItemsSource="{Binding ProductsListView}"
-                    >
-                    <!--ItemsSource="{Binding ProductListing, Source=ProductListing}"--> 
-                    
+                <ListView x:Name="ProductsListView" ItemsSource="{Binding ProductsListView}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.View>
-                        
                         <GridView>
-                            
                             <GridViewColumn Header="#" >
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <!--<TextBlock HorizontalAlignment="Center" Text="{Binding id}" />-->
                                         <TextBlock HorizontalAlignment="Center" Text="{Binding id}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
                             <GridViewColumn Header="Description" Width="440">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -68,7 +56,6 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
                             <GridViewColumn Header="Price">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -76,7 +63,6 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
                             <GridViewColumn Header="Quantity">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -84,7 +70,6 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            
                             <GridViewColumn Header="Sub Tot">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -100,21 +85,17 @@
             <Grid Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                 </Grid.ColumnDefinitions>
-                <TextBlock  Grid.Column="0"><Run Text="Insert bard code"/><InlineUIContainer>
-                        <Button x:Name="AddItemBtn" Content="Add_1" Width="75" Click="Button_Click_1"/>
-                    </InlineUIContainer><InlineUIContainer>
+                <TextBlock  Grid.Column="0"><Run Text="Insert bard code"/>
+                <InlineUIContainer>
                         <Button x:Name="ResetBtn" Content="Reset" Width="75" Click="ResetBtn_Click"/>
                     </InlineUIContainer></TextBlock>
-
             </Grid>
             <!--action buttons-->
             <Grid Grid.Row="3" >
                 <Grid.ColumnDefinitions>
                 </Grid.ColumnDefinitions>
                 <TextBlock  Grid.Column="0" Text="Insert bard code"/>
-
             </Grid>
-
         </Grid>
         <!-- second column, products items list  -->
         <Grid Grid.Column="1" >
@@ -122,11 +103,5 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
         </Grid>
-
-
-
-
-
-
     </Grid>
 </Window>

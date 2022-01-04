@@ -53,7 +53,7 @@ namespace WpfApp1
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void AddProductBtn(object sender, RoutedEventArgs e)
         {
             string description = Bar_Code_TXT.Text.ToString();
             ItemCollection currentProductsItems = ProductsListView.Items;
