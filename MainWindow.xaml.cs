@@ -36,22 +36,8 @@ namespace WpfApp1
             ProductsListView.DataContext = this;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("clicked");
-            var products = store.Set<product>();
-            products.Add(new product {  bar_code ="1111", quantity =11, price =111, description="test" });
-            store.SaveChanges();
-        }
-        private List<product> getProducts()
-        {
-            return store.products.ToList();
-        }
+       
         
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void AddProductBtn(object sender, RoutedEventArgs e)
         {
@@ -77,16 +63,31 @@ namespace WpfApp1
             {
                 currentProductsItems.Add(new product { bar_code = "1111", quantity = 1, price = 111, description = description });
             }
+            UpdateTotal();
             Console.WriteLine("productsList: " + productsList.Count);
             Console.WriteLine("currentProductsItems: " + currentProductsItems.Count);
             Console.WriteLine("currentProductsItems: " + currentProductsItems.Count);
             
+        }
+        private void UpdateTotal()
+        {
+            ItemCollection currentProductsItems = ProductsListView.Items;
+            List<product> productsList = currentProductsItems.OfType<product>().ToList();
+            decimal total = 0;
+            foreach (var product in productsList)
+            {
+                total += product.subTotal;
+            }
+                Console.WriteLine(total);
+            Total_TXT.Text = total + " SAR";
+            VAT_TXT.Text = total * (decimal)0.15 + " SAR";
         }
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
         {
             //ItemCollection currentProductsItems = ProductsListView.Items;
             ProductsListView.Items.Clear();
+            UpdateTotal();
         }
     }
 }
