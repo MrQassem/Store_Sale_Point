@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 using WpfApp1.ViewModels;
 using WpfApp1.Views;
 
@@ -28,16 +29,19 @@ namespace WpfApp1
         public ProductListingViewModel  ProductListing { get; set; }
         public ObservableCollection<product> Products{ get; set; }
 
-        ReciptPrinterView r = new ReciptPrinterView();
+        
 
 
         public MainWindow()
         {
             InitializeComponent();
-            ProductsListView.Items.Add((new product { id = 1, description = "test", bar_code = "t", price = 10, quantity = 1 }));
+            // initialize the Inventory View
+            ContentSide.Content = new InventoryViews();
             // initialize the Products cart, and it is observable
             Products = new ObservableCollection<product>();
             ProductsListView.DataContext = this;
+
+            //ProductsListView.Items.Add((new product { id = 1, description = "test", bar_code = "t", price = 10, quantity = 1 }));
         }
 
        
@@ -100,15 +104,37 @@ namespace WpfApp1
             }
             UpdateTotal();
         }
+       
+
+        private void ResetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ProductsListView.Items.Clear();
+            UpdateTotal();
+        }
+
+
+        private void InventoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+            
+
+        }
+
+        private void PrintBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ReciptPrinterView receipt = new ReciptPrinterView();
+            receipt.printRecipt(ProductsListView);
+        }
+
         private bool updateProductQuantity(int addOrRemoveQuantity, int productId)
         {
             var productToBeUpdated = store.products.Find(productId);
-            if (productToBeUpdated.quantity<=0)
+            if (productToBeUpdated.quantity <= 0)
             {
                 MessageBox.Show("Quantity for: ( " + productToBeUpdated.description + " ) has a quantity of " + productToBeUpdated.quantity + "\nCannot be added");
                 return false;
             }
-            productToBeUpdated.quantity+= addOrRemoveQuantity;
+            productToBeUpdated.quantity += addOrRemoveQuantity;
             store.SaveChanges();
             return true;
         }
@@ -121,29 +147,12 @@ namespace WpfApp1
             {
                 total += product.subTotal;
             }
+            decimal VAT = total * (decimal)0.15;
+            decimal totalPriceWithVat = VAT + total;
+
             Total_TXT.Text = total + " SAR";
             VAT_TXT.Text = total * (decimal)0.15 + " SAR";
-        }
-
-        private void ResetBtn_Click(object sender, RoutedEventArgs e)
-        {
-            r.printRecipt(ProductsListView);
-
-            //{ System.Windows.Controls.ListView Items.Count: 2}
-            //r.IsEnabled = true;
-            //r.IsEnabled = false;
-
-            //ProductsListView.Items.Clear();
-            //UpdateTotal();
-
-
-        }
-
-
-        private void InventoryBtn_Click(object sender, RoutedEventArgs e)
-        {
-            ContentSide.Content= new InventoryViews();
-            
+            Total_Price_TXT.Text = totalPriceWithVat + " SAR";
 
         }
     }

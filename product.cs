@@ -19,6 +19,6 @@ namespace WpfApp1
         public string bar_code { get; set; }
         public decimal price { get; set; }
         public int quantity { get; set; }
-        public decimal subTotal => price * quantity;
+        public decimal subTotal => quantity * price;
     }
 }

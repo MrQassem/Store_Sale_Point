@@ -70,8 +70,8 @@
                         </GridViewColumn>
                         <GridViewColumn Header="Description" Width="120">
                             <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Padding="0 0 20 0" Text="{Binding description}" />
+                                <DataTemplate >
+                                    <TextBlock TextWrapping="Wrap" Padding="0 0 20 0" Text="{Binding description}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

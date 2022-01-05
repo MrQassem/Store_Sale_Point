@@ -112,6 +112,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Product1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Product.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ProductListingViewModel.cs" />
     <Compile Include="Views\InventoryViews.xaml.cs">
       <DependentUpon>InventoryViews.xaml</DependentUpon>
@@ -153,11 +158,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Product.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Product1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Product.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -203,13 +203,17 @@
       <DependentUpon>Product.edmx</DependentUpon>
       <LastGenOutput>Product1.cs</LastGenOutput>
     </Content>
-    <Resource Include="Views\qr.png" />
     <Resource Include="Views\dummy-logo.png" />
+    <Resource Include="Views\qr.png" />
+    <Resource Include="ImagesResources\qr.png" />
+    <Resource Include="ImagesResources\dummy-logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

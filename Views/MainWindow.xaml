@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Store" Height="450" Width="1200">
+        Title="Store" Height="570" Width="1200">
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="Header">
             <Setter Property="FontSize" Value="20" />
@@ -91,21 +91,22 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel  Grid.Column="0"  >
-                    <TextBlock Text="Total" Style="{StaticResource Header}"/>
-                    <TextBlock x:Name="Total_TXT" Text="0"/>
-                    <TextBlock Text="VAT" Style="{StaticResource Header}"/>
-                    <TextBlock  x:Name="VAT_TXT" Text=""/>
+                    <TextBlock Text="Price" Style="{StaticResource Header}"/>
+                    <TextBlock x:Name="Total_TXT" Text="0 SAR"/>
                 </StackPanel>
-                <Grid   Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Paid" Style="{StaticResource Header}"/>
-                    <TextBlock Grid.Row="1" Text="Return" Style="{StaticResource Header}"/>
-                </Grid>
+                <StackPanel  Grid.Column="1"  >
+                    <TextBlock Text="VAT" Style="{StaticResource Header}"/>
+                    <TextBlock  x:Name="VAT_TXT" Text="0 SAR"/>
+                </StackPanel>
+                <StackPanel  Grid.Column="2"  >
+                    <TextBlock Text="Total Price" Style="{StaticResource Header}"/>
+                    <TextBlock  x:Name="Total_Price_TXT" Text="0 SAR" Style="{StaticResource Header}"/>
+                </StackPanel>
+
+                
 
             </Grid>
             <!--action buttons-->
@@ -117,7 +118,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0"  x:Name="ResetBtn" Content="Reset"  Click="ResetBtn_Click" Margin=" 15 0"/>
-                <Button Grid.Column="1"  Content="Print" Margin=" 15 0" />
+                <Button x:Name="PrintBtn" Grid.Column="1"  Content="Print" Margin=" 15 0" Click="PrintBtn_Click" />
                 <Button Grid.Column="2" x:Name="InventoryBtn"   Content="Inventory" Click="InventoryBtn_Click"   Margin=" 15 0" />
                 
                 <!--<Button Grid.Column="1" x:Name="" Content="Reset"  Click="ResetBtn_Click"/>
