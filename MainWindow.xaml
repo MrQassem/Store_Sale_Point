@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1200">
+        Title="Store" Height="450" Width="1200">
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="Header">
             <Setter Property="FontSize" Value="20" />
         </Style>
     </Window.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+    <Grid Margin="24">
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!-- first column, main  -->
@@ -22,7 +22,7 @@
                 <RowDefinition Height="20" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="100" />
-                <RowDefinition Height="70" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
             <!-- bar code  -->
             <Grid Grid.Row="0" >
@@ -31,12 +31,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Insert bard code"/>
-                <TextBox Grid.Column="1" Name="Bar_Code_TXT"   Text=""/>
+                
+                <TextBlock Grid.Column="0" Text="Insert bard code" Margin="5 0"/>
+                <TextBox Grid.Column="1" Name="Bar_Code_TXT"   Text="" Margin="10 0"/>
                 <Button Grid.Column="2" x:Name="AddItemBtn" Content="Add" Width="75" Click="AddProductBtn" />
             </Grid>
             <!--main division-->
-            <Grid Grid.Row="1" >
+            <Grid Grid.Row="1" Margin="0 10">
                 <!--<TextBlock  Grid.Column="0" Text="Insert bard code"/>-->
                 <ListView x:Name="ProductsListView" ItemsSource="{Binding ProductsListView}">
                     <ListView.ItemContainerStyle>
@@ -115,9 +116,10 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" x:Name="ResetBtn" Content="Reset"  Click="ResetBtn_Click"/>
-                <Button Grid.Column="1"  Content="Print"  />
-                <Button x:Name="InventoryBtn" Grid.Column="1"  Content="Inventory" Click="InventoryBtn_Click" Grid.ColumnSpan="2" Margin="185,0,26,0"  />
+                <Button Grid.Column="0"  x:Name="ResetBtn" Content="Reset"  Click="ResetBtn_Click" Margin=" 15 0"/>
+                <Button Grid.Column="1"  Content="Print" Margin=" 15 0" />
+                <Button Grid.Column="2" x:Name="InventoryBtn"   Content="Inventory" Click="InventoryBtn_Click"   Margin=" 15 0" />
+                
                 <!--<Button Grid.Column="1" x:Name="" Content="Reset"  Click="ResetBtn_Click"/>
                 <Button Grid.Column="2" x:Name="" Content="Reset"  Click="ResetBtn_Click"/>-->
             </Grid>

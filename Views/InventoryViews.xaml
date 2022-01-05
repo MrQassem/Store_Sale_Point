@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp1.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             Background="White" 
+             d:DesignHeight="450" d:DesignWidth="500">
     
-    <Grid >
+    <Grid Margin="20">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -22,26 +22,26 @@
         <!--second column, data grid inventory-->
 
 
-        <DataGrid Grid.Row="0" Grid.Column="0" x:Name="InventoryDataGrid"  CanUserAddRows="False" CanUserDeleteRows="False" Width="700" Height="200" SelectedCellsChanged="ProductSelctedChanged"/>
-            <Grid Grid.Row="0" Grid.Column="1" >
-                <StackPanel Grid.Row="0" Grid.Column="1" >
-                    <TextBlock Text="Id"/>
-                    <TextBox x:Name="Id_TXT" Text="" />
-                    <TextBlock Text="Description"/>
-                    <TextBox x:Name="Description_TXT" Text="" />
-                    <TextBlock Text="Bar Code"/>
-                    <TextBox x:Name="Bar_Code_TXT"  Text=""/>
-                    <TextBlock Text="Price"/>
-                    <TextBox x:Name="Price_TXt" Text="" />
-                    <TextBlock Text="Quantity"/>
-                    <TextBox x:Name="Quantity_TXt" Text=""/>
-                <StackPanel Orientation="Horizontal" >
-                    <Button  Content="Save" Click="SaveBtn_Click"></Button>
-                    <Button  Content="Add New Product" Click="AddNewProductBtn_Click"></Button>
-                    <Button  Content="Delete" Click="DeleteBtn_Click"></Button>
-                </StackPanel>
+        <DataGrid Grid.Row="0" Grid.Column="0" x:Name="InventoryDataGrid"  CanUserAddRows="False" CanUserDeleteRows="False" Width="auto" Height="auto" SelectedCellsChanged="ProductSelctedChanged"/>
+        <Grid Grid.Row="1" Grid.Column="0"  >
+            <StackPanel Grid.Row="0" Grid.Column="1"  >
+                <TextBlock Text="Id"/>
+                <TextBox x:Name="Id_TXT" Text="" IsEnabled="False" />
+                <TextBlock Text="Description"/>
+                <TextBox x:Name="Description_TXT" Text="" />
+                <TextBlock Text="Bar Code"/>
+                <TextBox x:Name="Bar_Code_TXT"  Text=""/>
+                <TextBlock Text="Price"/>
+                <TextBox x:Name="Price_TXt" Text="" />
+                <TextBlock Text="Quantity"/>
+                <TextBox x:Name="Quantity_TXt" Text=""/>
+            <StackPanel Orientation="Horizontal" Margin="0 10" >
+                    <Button  Content="Save" Click="SaveBtn_Click" Margin=" 10 0" ></Button>
+                    <Button  Content="Add New Product" Click="AddNewProductBtn_Click" Margin=" 10 0" ></Button>
+                    <Button  Content="Delete" Click="DeleteBtn_Click" Margin=" 10 0" ></Button>
             </StackPanel>
-            </Grid>
+        </StackPanel>
+        </Grid>
         
         <!--<TextBlock Text="Hi" Foreground="Green" FontSize="36" />-->
     </Grid>

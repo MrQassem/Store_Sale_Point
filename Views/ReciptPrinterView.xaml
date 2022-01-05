@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp1.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="750" d:DesignWidth="270">
-    <Grid x:Name="ReciptGrid"    Background="White" Width="270" Height="auto" >
+             d:DesignHeight="750" d:DesignWidth="300">
+    <Grid x:Name="ReciptGrid"    Background="White" Width="300" Height="700" >
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -51,28 +51,9 @@
         </Grid>
 
         <!--receipt details-->
-        <Grid Grid.Row="2"  Margin="0">
-            <!--<Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="15"/>
-                <ColumnDefinition Width="15"/>
-                <ColumnDefinition Width="30"/>
-            </Grid.ColumnDefinitions>
-            <Grid>
-                <Grid Grid.Column="0">
-                    <TextBlock Text="1:" FontSize="12" Margin="5"/>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <TextBlock Text="1:" FontSize="12" Margin="5"/>
-                </Grid>
-            </Grid>-->
-                <!--<TextBlock Text="100.00 SAR" FontSize="12" Margin="5" FontWeight="DemiBold"/>-->
-
-            <!--<DataGrid Background="Yellow" x:Name="ProductsDetailsGrid">
-
-            </DataGrid>-->
-            <ListView x:Name="ProductsDetailsGrid" ItemsSource="{Binding ProductsDetailsGrid}" >
+        <Grid Grid.Row="2"  Margin="0" >
+            <ListView x:Name="ProductsDetailsGrid" ItemsSource="{Binding ProductsDetailsGrid}"  Height="auto">
+                
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -87,28 +68,28 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Description" Width="100">
+                        <GridViewColumn Header="Description" Width="120">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Padding="0 0 20 0" Text="{Binding description}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Price" Width="30">
+                        <GridViewColumn Header="Price" Width="50">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Padding="0 0 20 0" Text="{Binding price}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Quantity" Width="30">
+                        <GridViewColumn Header="Quantity" Width="50">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Padding="0 0 20 0" Text="{Binding quantity}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Sub Tot" Width="50">
+                        <GridViewColumn Header="Sub Tot" Width="70">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Padding="0 0 20 0" Text="{Binding subTotal}" />
@@ -121,25 +102,25 @@
         </Grid>
         
         <!--receipt summary-->
+        
         <Grid Grid.Row="3"  Margin="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto" SharedSizeGroup="c1"/>
+                <ColumnDefinition Width="auto" SharedSizeGroup="c2"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="*"></RowDefinition>
+                <RowDefinition  Height="*"></RowDefinition>
+                <RowDefinition  Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Price:" FontSize="12" Margin="5"/>
-                    <TextBlock x:Name="Price_TXT_Blcok" Text="100.00 SAR" FontSize="12" Margin="5" FontWeight="DemiBold"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="VAT:" FontSize="12" Margin="5"/>
-                    <TextBlock x:Name="VAT_TXT_Blcok" Text="15.00 SAR" FontSize="12" Margin="5" FontWeight="DemiBold"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Total:" FontSize="17" Margin="5" FontWeight="DemiBold"/>
-                    <TextBlock x:Name="Total_Price_TXT_Blcok" Text="115.00 SAR" FontSize="17" Margin="5" FontWeight="DemiBold"/>
-                </StackPanel>
-            </StackPanel>
+            <TextBlock Grid.Column="0" Grid.Row="0"  Text="Price:" FontSize="12" Margin="5"/>
+            <TextBlock Grid.Column="1" Grid.Row="0"  x:Name="Price_TXT_Blcok" Text="100.00 SAR" FontSize="12" Margin="5" FontWeight="DemiBold"/>
+            <TextBlock Grid.Column="0" Grid.Row="1"  Text="VAT:" FontSize="12" Margin="5"/>
+            <TextBlock Grid.Column="1" Grid.Row="1"  x:Name="VAT_TXT_Blcok" Text="15.00 SAR" FontSize="12" Margin="5" FontWeight="DemiBold"/>
+            <TextBlock Grid.Column="0" Grid.Row="2"   Text="Total:" FontSize="17" Margin="5"/>
+            <TextBlock Grid.Column="1" Grid.Row="2"  x:Name="Total_Price_TXT_Blcok" Text="115.00 SAR" FontSize="17" Margin="5" FontWeight="DemiBold"/>
+
         </Grid>
 
 
