@@ -116,6 +116,9 @@
     <Compile Include="Views\InventoryViews.xaml.cs">
       <DependentUpon>InventoryViews.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ReciptPrinterView.xaml.cs">
+      <DependentUpon>ReciptPrinterView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -129,6 +132,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\InventoryViews.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReciptPrinterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,6 +203,8 @@
       <DependentUpon>Product.edmx</DependentUpon>
       <LastGenOutput>Product1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Views\qr.png" />
+    <Resource Include="Views\dummy-logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

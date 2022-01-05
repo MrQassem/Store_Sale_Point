@@ -28,6 +28,9 @@ namespace WpfApp1
         public ProductListingViewModel  ProductListing { get; set; }
         public ObservableCollection<product> Products{ get; set; }
 
+        ReciptPrinterView r = new ReciptPrinterView();
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -124,8 +127,16 @@ namespace WpfApp1
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
         {
-            ProductsListView.Items.Clear();
-            UpdateTotal();
+            r.printRecipt(ProductsListView);
+
+            //{ System.Windows.Controls.ListView Items.Count: 2}
+            //r.IsEnabled = true;
+            //r.IsEnabled = false;
+
+            //ProductsListView.Items.Clear();
+            //UpdateTotal();
+
+
         }
 
 
