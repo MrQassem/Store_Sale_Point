@@ -41,7 +41,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'A product that is some long description','1',10,28),(10,'b','2',5,29),(11,'c','3',15,29),(27,'c','4',15,29),(28,'d','5',20,29),(29,'e','6',30,29),(30,'e','7',30,29),(31,'f','8',40,28),(32,'g','9',50,30),(33,'h','10',60,30),(34,'new ','11',99,30),(35,'Apple','12',5,38);
+INSERT INTO `products` VALUES (1,'A product A','1',10,28),(10,'b','2',5,29),(11,'c','3',15,29),(27,'c','4',15,29),(28,'d','5',20,29),(29,'e','6',30,29),(30,'e','7',30,29),(31,'f','8',40,28),(32,'g','9',50,30),(33,'h','10',60,30),(34,'new ','11',99,30),(35,'Apple','12',5,38);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

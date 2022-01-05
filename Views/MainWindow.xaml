@@ -54,7 +54,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Description" Width="440">
+                            <GridViewColumn Header="Description" Width="350">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock TextWrapping="Wrap" Padding="0 0 20 0" Text="{Binding description}" />

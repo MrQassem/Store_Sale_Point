@@ -13,6 +13,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
             <RowDefinition Height="200" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
@@ -22,8 +23,9 @@
         <!--second column, data grid inventory-->
 
 
-        <DataGrid Grid.Row="0" Grid.Column="0" x:Name="InventoryDataGrid"  CanUserAddRows="False" CanUserDeleteRows="False" Width="auto" Height="auto" SelectedCellsChanged="ProductSelctedChanged"/>
-        <Grid Grid.Row="1" Grid.Column="0"  >
+        <TextBlock Grid.Row="0" FontSize="17" Text="Inventory" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <DataGrid Grid.Row="1" Grid.Column="0" x:Name="InventoryDataGrid"  CanUserAddRows="False" CanUserDeleteRows="False" Width="auto" Height="auto" SelectedCellsChanged="ProductSelctedChanged"/>
+        <Grid Grid.Row="2" Grid.Column="0"  >
             <StackPanel Grid.Row="0" Grid.Column="1"  >
                 <TextBlock Text="Id"/>
                 <TextBox x:Name="Id_TXT" Text="" IsEnabled="False" />

@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.ViewModels
 {
-    public class ProductListingViewModel : INotifyPropertyChanged
+    public class ProductListingViewModel 
     {
         storeEntities store = new storeEntities();
         //private List<product> products ;
         public List<product> products { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public ProductListingViewModel()
         {
