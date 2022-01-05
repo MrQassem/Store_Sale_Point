@@ -48,7 +48,8 @@
         </Grid>
         <!--receipt details-->
         <Grid Grid.Row="2"  Margin="0" Height="auto">
-            <ListView x:Name="ProductsDetailsGrid" ItemsSource="{Binding ProductsDetailsGrid}"  Height="auto">
+            <ListView x:Name="ProductsDetailsGrid" ItemsSource="{Binding ProductsDetailsGrid}"  Height="auto"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
