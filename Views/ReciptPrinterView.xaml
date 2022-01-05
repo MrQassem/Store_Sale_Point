@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:WpfApp1.Views"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="300">
-    <Grid x:Name="ReciptGrid"    Background="White" Width="300" Height="700" >
-
+    <Grid x:Name="ReciptGrid"    Background="White" Width="300" Height="auto" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -18,12 +17,10 @@
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
-
         <StackPanel Grid.Row="0"   HorizontalAlignment="Center" VerticalAlignment="Center" >
             <TextBlock Text="Company Name" FontSize="22"/>
             <Image Width="70" Height="70" Source="dummy-logo.png" />
         </StackPanel>
-
         <!--receipt information-->
         <Grid Grid.Row="1"  Margin="0">
             <Grid.ColumnDefinitions>
@@ -49,11 +46,10 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-
         <!--receipt details-->
-        <Grid Grid.Row="2"  Margin="0" >
+        <Grid Grid.Row="2"  Margin="0" Height="auto">
             <ListView x:Name="ProductsDetailsGrid" ItemsSource="{Binding ProductsDetailsGrid}"  Height="auto">
-                
+
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -100,9 +96,7 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        
         <!--receipt summary-->
-        
         <Grid Grid.Row="3"  Margin="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" SharedSizeGroup="c1"/>
@@ -113,7 +107,6 @@
                 <RowDefinition  Height="*"></RowDefinition>
                 <RowDefinition  Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-
             <TextBlock Grid.Column="0" Grid.Row="0"  Text="Price:" FontSize="12" Margin="5"/>
             <TextBlock Grid.Column="1" Grid.Row="0"  x:Name="Price_TXT_Blcok" Text="100.00 SAR" FontSize="12" Margin="5" FontWeight="DemiBold"/>
             <TextBlock Grid.Column="0" Grid.Row="1"  Text="VAT:" FontSize="12" Margin="5"/>
@@ -122,14 +115,10 @@
             <TextBlock Grid.Column="1" Grid.Row="2"  x:Name="Total_Price_TXT_Blcok" Text="115.00 SAR" FontSize="17" Margin="5" FontWeight="DemiBold"/>
 
         </Grid>
-
-
         <!--receipt qr code-->
         <StackPanel Grid.Row="4"   HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Image Width="70" Height="70" Source="qr.png" />
             <TextBlock Text="Scan QR to download:" FontSize="12" Margin="5"/>
-
         </StackPanel>
-
     </Grid>
 </UserControl>

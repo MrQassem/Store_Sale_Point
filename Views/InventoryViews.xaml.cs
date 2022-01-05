@@ -1,20 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using WpfApp1;
 
 namespace WpfApp1.Views
 {
@@ -25,17 +14,14 @@ namespace WpfApp1.Views
     {
         storeEntities store = new storeEntities();
         public ObservableCollection<product> Products { get; set; }
-
         public InventoryViews()
         {
             InitializeComponent();
-
             InventoryDataGrid.ItemsSource = getProductsList();
             Products = new ObservableCollection<product>();
             InventoryDataGrid.DataContext = this;
 
         }
-
         private IEnumerable getProductsList()
         {
             return store.products.ToList().Select(product => 
@@ -49,17 +35,17 @@ namespace WpfApp1.Views
             ).ToList();
         }
 
+        // save the changed fields for the inventory
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            //store.SaveChanges();
             product selectedProduct = getSelectedProduct();
+            // check there's list item selected, then show error message box
+            // in case missing values or incorrect values.
             if(selectedProduct != null)
             {
                 product productToBeUpdated = store.products.Find(selectedProduct.id);
-
                 try
                 {
-
                 productToBeUpdated.description = Description_TXT.Text ;
                 productToBeUpdated.bar_code = Bar_Code_TXT.Text;
                 productToBeUpdated.price = Decimal.Parse (Price_TXt.Text);
@@ -73,11 +59,10 @@ namespace WpfApp1.Views
                     MessageBox.Show("price and quantity is numbers only!");
                 }
             }
-
         }
-
         private void AddNewProductBtn_Click(object sender, RoutedEventArgs e)
         {
+            // check there's no product with the given bar code
             try
             {
                 product isProductExist = store.products.FirstOrDefault( p => p.bar_code == Bar_Code_TXT.Text );
@@ -103,12 +88,7 @@ namespace WpfApp1.Views
                 MessageBox.Show("price and quantity is numbers only!");
             }
         }
-
-        private void ProductSelctedChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
+        // delete a product from the inventory, confirm message is provided
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             product productToDelete = getSelectedProduct();
@@ -124,24 +104,21 @@ namespace WpfApp1.Views
                 UpdateInventoryDataGrid();
             }
         }
-
+        // if the user is selecting a list item, add the product information
+        // to the text fields if he wants to update, or delete
         private void ProductSelctedChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             // the Mysql entity framework has a bug and it is crashing if I try to
             // get the selected item and cast it to product. So I decided to substring the id
             // from the object of the selcted item
-
             product selectedProduct = getSelectedProduct();
             if (selectedProduct != null)
             {
-            Console.WriteLine(selectedProduct.description);
-
             Id_TXT.Text = selectedProduct.id.ToString();
             Description_TXT.Text = selectedProduct.description;
             Bar_Code_TXT.Text = selectedProduct.bar_code;
             Price_TXt.Text = selectedProduct.price.ToString();
             Quantity_TXt.Text = selectedProduct.quantity.ToString();
-
             }
             else
             {
@@ -151,8 +128,8 @@ namespace WpfApp1.Views
                 Price_TXt.Text = "";
                 Quantity_TXt.Text = "";
             }
-
         }
+        // return a product object for a selected item
         private product getSelectedProduct()
         {
             object selectedItem = InventoryDataGrid.SelectedValue;
@@ -168,7 +145,6 @@ namespace WpfApp1.Views
                 }
                 else
                 {
-
                 int indexStart = selectedItem.ToString().IndexOf("id = ") + 5;
                 int indexEnd = selectedItem.ToString().IndexOf(", description");
                 int length = indexEnd - indexStart;
