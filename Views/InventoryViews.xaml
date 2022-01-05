@@ -22,7 +22,7 @@
         <!--second column, data grid inventory-->
 
 
-        <DataGrid Grid.Row="0" Grid.Column="0" x:Name="InventoryDataGrid" ItemsSource="Products" CanUserAddRows="False" CanUserDeleteRows="False" Width="700" Height="200" SelectedCellsChanged="ProductSelctedChanged"/>
+        <DataGrid Grid.Row="0" Grid.Column="0" x:Name="InventoryDataGrid"  CanUserAddRows="False" CanUserDeleteRows="False" Width="700" Height="200" SelectedCellsChanged="ProductSelctedChanged"/>
             <Grid Grid.Row="0" Grid.Column="1" >
                 <StackPanel Grid.Row="0" Grid.Column="1" >
                     <TextBlock Text="Id"/>

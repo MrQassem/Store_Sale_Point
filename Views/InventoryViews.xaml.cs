@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -28,7 +29,15 @@ namespace WpfApp1.Views
         {
             InitializeComponent();
 
-            InventoryDataGrid.ItemsSource = store.products.ToList().Select(product => 
+            InventoryDataGrid.ItemsSource = getProductsList();
+            Products = new ObservableCollection<product>();
+            InventoryDataGrid.DataContext = this;
+
+        }
+
+        private IEnumerable getProductsList()
+        {
+            return store.products.ToList().Select(product => 
                 new {
                     product.id,
                     product.description,
@@ -37,19 +46,61 @@ namespace WpfApp1.Views
                     product.quantity
                 }
             ).ToList();
-            Products = new ObservableCollection<product>();
-            InventoryDataGrid.DataContext = this;
-
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            store.SaveChanges();
+            //store.SaveChanges();
+            product selectedProduct = getSelectedProduct();
+            if(selectedProduct != null)
+            {
+                product productToBeUpdated = store.products.Find(selectedProduct.id);
+
+                try
+                {
+
+                productToBeUpdated.description = Description_TXT.Text ;
+                productToBeUpdated.bar_code = Bar_Code_TXT.Text;
+                productToBeUpdated.price = Decimal.Parse (Price_TXt.Text);
+                productToBeUpdated.quantity = Int32.Parse( Quantity_TXt.Text );
+                store.SaveChanges();
+                MessageBox.Show("Changes Saved");
+                UpdateInventoryDataGrid();
+                }
+                catch
+                {
+                    MessageBox.Show("price and quantity is numbers only!");
+                }
+            }
+
         }
 
         private void AddNewProductBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                product isProductExist = store.products.FirstOrDefault( p => p.bar_code == Bar_Code_TXT.Text );
+                // the product with this barcode exist, don't add !
+                if(isProductExist != null)
+                {
+                    MessageBox.Show("Product with this bar code already exist!\nCan not Add this product.");
+                    return;
+                }
+                store.products.Add(new product
+                {
+                    description = Description_TXT.Text,
+                    bar_code = Bar_Code_TXT.Text,
+                    price = Decimal.Parse(Price_TXt.Text),
+                    quantity = Int32.Parse(Quantity_TXt.Text)
+                });
+                store.SaveChanges();
+                MessageBox.Show("Product Added Successfully!");
+                UpdateInventoryDataGrid();
+            }
+            catch
+            {
+                MessageBox.Show("price and quantity is numbers only!");
+            }
         }
 
         private void ProductSelctedChanged(object sender, SelectionChangedEventArgs e)
@@ -69,8 +120,7 @@ namespace WpfApp1.Views
                 store.products.Remove(productToDelete);
                 store.SaveChanges();
                 MessageBox.Show("Deleted Successfully");
-                InventoryDataGrid.ItemsSource = null;
-                InventoryDataGrid.ItemsSource = store.products.ToList();
+                UpdateInventoryDataGrid();
             }
         }
 
@@ -135,6 +185,11 @@ namespace WpfApp1.Views
                 return null;
             }
             
+        }
+        private void UpdateInventoryDataGrid()
+        {
+            InventoryDataGrid.ItemsSource = null;
+            InventoryDataGrid.ItemsSource = getProductsList();
         }
     }
 }
